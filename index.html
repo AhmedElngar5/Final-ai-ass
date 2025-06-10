@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Medical Assistant - Your Smart Health Companion</title>
+    <meta name="description" content="Get instant AI-powered medical symptom analysis and personalized health insights. Our advanced AI assistant helps you understand your symptoms and provides preliminary medical guidance.">
+    <meta name="keywords" content="AI medical assistant, symptom checker, health diagnosis, medical AI, healthcare technology">
+    <meta name="author" content="AI Medical Assistant">
+    <meta name="theme-color" content="#2563eb">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AI Medical Assistant - Your Smart Health Companion">
+    <meta property="og:description" content="Get instant AI-powered medical symptom analysis and personalized health insights.">
+    <meta property="og:image" content="medical-banner-with-doctor-wearing-goggles.jpg">
+    <meta property="og:url" content="https://aimedical.com">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                            950: '#172554',
+                        },
+                        secondary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                            950: '#431407',
+                        },
+                        success: {
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                        },
+                        warning: {
+                            50: '#fffbeb',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                        danger: {
+                            50: '#fef2f2',
+                            500: '#ef4444',
+                            600: '#dc2626',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter var', 'Inter', 'system-ui', 'sans-serif'],
+                        display: ['Lexend', 'Inter var', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'slide-down': 'slideDown 0.5s ease-out',
+                        'slide-in-right': 'slideInRight 0.5s ease-out',
+                        'slide-in-left': 'slideInLeft 0.5s ease-out',
+                        'bounce-slow': 'bounce 3s infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideDown: {
+                            '0%': { transform: 'translateY(-20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideInRight: {
+                            '0%': { transform: 'translateX(20px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        slideInLeft: {
+                            '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+                        'soft-lg': '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02)',
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        /* Dark mode scrollbar */
+        .dark ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+        
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+        
+        /* Custom focus styles */
+        .focus-ring {
+            @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900;
+        }
+        
+        /* Custom transitions */
+        .transition-soft {
+            @apply transition-all duration-300 ease-in-out;
+        }
+        
+        /* Custom gradients */
+        .gradient-primary {
+            @apply bg-gradient-to-br from-primary-600 to-primary-800;
+        }
+        
+        .gradient-secondary {
+            @apply bg-gradient-to-br from-secondary-500 to-secondary-700;
+        }
+        
+        /* Custom animations */
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Custom backdrop blur */
+        .backdrop-blur-soft {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col dark:bg-slate-900 dark:text-slate-100">
+    <!-- Navigation -->
+    <header class="fixed w-full top-0 z-50 backdrop-blur-soft bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2 text-primary-600 dark:text-primary-400 font-display font-semibold text-lg transition-soft hover:text-primary-700 dark:hover:text-primary-300">
+                        <i class="fas fa-heartbeat text-primary-600 dark:text-primary-400"></i>
+                        <span>AI Medical Assistant</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="text-slate-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 text-sm font-medium border-b-2 border-primary-600 dark:border-primary-400 transition-soft">Home</a>
+                    <a href="diagnosis.html" class="text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 text-sm font-medium border-b-2 border-transparent hover:border-primary-600 dark:hover:border-primary-400 transition-soft">Diagnosis</a>
+                    <a href="index face.html" class="text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 text-sm font-medium border-b-2 border-transparent hover:border-primary-600 dark:hover:border-primary-400 transition-soft">Contact</a>
+                    <a href="About.Html" class="text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 text-sm font-medium border-b-2 border-transparent hover:border-primary-600 dark:hover:border-primary-400 transition-soft">About</a>
+                    <button id="loginBtn" class="ml-6 bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white rounded-full px-4 py-2 text-sm font-medium shadow-soft transition-soft focus-ring">
+                        Login
+                    </button>
+                    <button id="themeToggle" class="p-2 text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-soft focus-ring rounded-full">
+                        <i class="fas fa-sun dark:hidden"></i>
+                        <i class="fas fa-moon hidden dark:block"></i>
+                    </button>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden space-x-4">
+                    <button id="themeToggleMobile" class="p-2 text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-soft focus-ring rounded-full">
+                        <i class="fas fa-sun dark:hidden"></i>
+                        <i class="fas fa-moon hidden dark:block"></i>
+                    </button>
+                    <button id="mobileMenuBtn" class="p-2 text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-soft focus-ring rounded-full">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-soft-lg animate-slide-down">
+            <div class="container mx-auto px-4 py-3 space-y-1">
+                <a href="index.html" class="block py-2 px-3 text-primary-600 dark:text-primary-400 font-medium rounded-md bg-primary-50 dark:bg-primary-900/20">Home</a>
+                <a href="diagnosis.html" class="block py-2 px-3 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary-600 dark:hover:text-primary-400 rounded-md transition-soft">Diagnosis</a>
+                <a href="index face.html" class="block py-2 px-3 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary-600 dark:hover:text-primary-400 rounded-md transition-soft">Contact</a>
+                <a href="About.Html" class="block py-2 px-3 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary-600 dark:hover:text-primary-400 rounded-md transition-soft">About</a>
+                <button id="mobileLoginBtn" class="mt-3 w-full bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white rounded-md px-4 py-2 text-sm font-medium shadow-soft transition-soft focus-ring">
+                    Login
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-soft z-50 flex items-center justify-center p-4 animate-fade-in">
+        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-soft-lg w-full max-w-md relative overflow-hidden animate-slide-up">
+            <div class="absolute right-4 top-4">
+                <button id="closeModal" class="text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300 transition-soft focus-ring rounded-full p-1">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="p-6">
+                <div class="flex border-b border-slate-200 dark:border-slate-700 mb-6">
+                    <button id="loginTabBtn" class="flex-1 py-3 text-center font-medium text-primary-600 dark:text-primary-400 border-b-2 border-primary-600 dark:border-primary-400 transition-soft">Login</button>
+                    <button id="registerTabBtn" class="flex-1 py-3 text-center font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-soft">Register</button>
+                </div>
+                
+                <!-- Login Form -->
+                <form id="loginForm" class="space-y-6">
+                    <div>
+                        <label for="loginEmail" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Email</label>
+                        <input type="email" id="loginEmail" class="mt-1 block w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-200 dark:focus:ring-primary-800 focus:ring-opacity-50 transition-soft" required>
+                    </div>
+                    <div>
+                        <label for="loginPassword" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Password</label>
+                        <input type="password" id="loginPassword" class="mt-1 block w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-200 dark:focus:ring-primary-800 focus:ring-opacity-50 transition-soft" required>
+                    </div>
+                    <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white rounded-lg py-2 px-4 font-medium shadow-soft transition-soft focus-ring">
+                        Login
+                    </button>
+                </form>
+                
+                <!-- Register Form (hidden by default) -->
+                <form id="registerForm" class="hidden space-y-6">
+                    <div>
+                        <label for="registerName" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Full Name</label>
+                        <input type="text" id="registerName" class="mt-1 block w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-200 dark:focus:ring-primary-800 focus:ring-opacity-50 transition-soft" required>
+                    </div>
+                    <div>
+                        <label for="registerEmail" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Email</label>
+                        <input type="email" id="registerEmail" class="mt-1 block w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-200 dark:focus:ring-primary-800 focus:ring-opacity-50 transition-soft" required>
+                    </div>
+                    <div>
+                        <label for="registerPassword" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Password</label>
+                        <input type="password" id="registerPassword" class="mt-1 block w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-200 dark:focus:ring-primary-800 focus:ring-opacity-50 transition-soft" required>
+                    </div>
+                    <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white rounded-lg py-2 px-4 font-medium shadow-soft transition-soft focus-ring">
+                        Register
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <main class="flex-grow pt-16">
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden bg-slate-900 text-white">
+            <div class="absolute inset-0 z-0">
+                <img src="background.jpg" alt="" class="w-full h-full object-cover opacity-20">
+                <div class="absolute inset-0 gradient-primary opacity-90"></div>
+            </div>
+            
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="text-center lg:text-left animate-slide-in-left">
+                        <h1 class="text-4xl sm:text-5xl font-display font-bold mb-6 tracking-tight">
+                            Your Smart <span class="text-secondary-400">Medical Assistant</span>
+                        </h1>
+                        <p class="text-xl text-slate-200 mb-10 max-w-lg mx-auto lg:mx-0">
+                            Intelligent symptom analysis using AI and Natural Language Processing for personalized health insights
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a href="diagnosis.html" class="inline-flex justify-center items-center px-6 py-3 bg-secondary-500 hover:bg-secondary-600 text-white font-medium rounded-full shadow-soft transition-soft focus-ring">
+                                Start Diagnosis
+                                <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                            <a href="About.Html" class="inline-flex justify-center items-center px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-medium rounded-full backdrop-blur-soft transition-soft focus-ring">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hidden lg:block animate-float">
+                        <img src="medical-banner-with-doctor-wearing-goggles.jpg" alt="Doctor using AI technology" class="rounded-2xl shadow-soft-lg max-w-full mx-auto" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-0 left-0 right-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="text-slate-50 dark:text-slate-900">
+                    <path fill="currentColor" fill-opacity="1" d="M0,256L48,240C96,224,192,192,288,181.3C384,171,480,181,576,197.3C672,213,768,235,864,229.3C960,224,1056,192,1152,186.7C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                </svg>
+            </div>
+        </section>
+        
+        <!-- Stats Section -->
+        <section class="py-12 sm:py-16 bg-white dark:bg-slate-800">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-soft hover:shadow-soft-lg transition-soft animate-fade-in" style="animation-delay: 0.1s">
+                        <div class="text-4xl font-bold text-primary-600 dark:text-primary-400 mb-2 flex items-center">
+                            <span class="counter" data-target="98">0</span>
+                            <span class="text-2xl ml-1">%</span>
+                        </div>
+                        <div class="text-sm text-slate-600 dark:text-slate-400">Accuracy Rate</div>
+                    </div>
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-soft hover:shadow-soft-lg transition-soft animate-fade-in" style="animation-delay: 0.2s">
+                        <div class="text-4xl font-bold text-primary-600 dark:text-primary-400 mb-2">24/7</div>
+                        <div class="text-sm text-slate-600 dark:text-slate-400">Availability</div>
+                    </div>
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-soft hover:shadow-soft-lg transition-soft animate-fade-in" style="animation-delay: 0.3s">
+                        <div class="text-4xl font-bold text-primary-600 dark:text-primary-400 mb-2 flex items-center">
+                            <span class="counter" data-target="10">0</span>
+                            <span class="text-2xl ml-1">k+</span>
+                        </div>
+                        <div class="text-sm text-slate-600 dark:text-slate-400">Users Helped</div>
+                    </div>
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-soft hover:shadow-soft-lg transition-soft animate-fade-in" style="animation-delay: 0.4s">
+                        <div class="text-4xl font-bold text-primary-600 dark:text-primary-400 mb-2 flex items-center">
+                            <span class="counter" data-target="1">0</span>
+                            <span class="text-2xl ml-1">M+</span>
+                        </div>
+                        <div class="text-sm text-slate-600 dark:text-slate-400">Diagnoses Run</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-16 sm:py-24 bg-slate-50 dark:bg-slate-900">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
+                    <span class="text-sm font-semibold text-primary-600 dark:text-primary-400 uppercase tracking-wide">Features</span>
+                    <h2 class="mt-2 text-3xl font-display font-bold text-slate-900 dark:text-white sm:text-4xl">Why Choose Us</h2>
+                    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">Our AI-powered platform offers several advantages for your health needs</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-soft-lg transition-soft animate-slide-up" style="animation-delay: 0.1s">
+                        <div class="bg-primary-100 dark:bg-primary-900/20 rounded-full w-12 h-12 flex items-center justify-center mb-5">
+                            <i class="fas fa-user-md text-primary-600 dark:text-primary-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Easy to Use</h3>
+                        <p class="text-slate-600 dark:text-slate-400">Simple interface for describing your symptoms with natural language</p>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-soft-lg transition-soft animate-slide-up" style="animation-delay: 0.2s">
+                        <div class="bg-primary-100 dark:bg-primary-900/20 rounded-full w-12 h-12 flex items-center justify-center mb-5">
+                            <i class="fas fa-chart-line text-primary-600 dark:text-primary-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">High Accuracy</h3>
+                        <p class="text-slate-600 dark:text-slate-400">Advanced AI algorithms provide precise analysis of your symptoms</p>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-soft-lg transition-soft animate-slide-up" style="animation-delay: 0.3s">
+                        <div class="bg-primary-100 dark:bg-primary-900/20 rounded-full w-12 h-12 flex items-center justify-center mb-5">
+                            <i class="fas fa-bolt text-primary-600 dark:text-primary-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Fast Results</h3>
+                        <p class="text-slate-600 dark:text-slate-400">Get instant preliminary diagnosis without long wait times</p>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-soft-lg transition-soft animate-slide-up" style="animation-delay: 0.4s">
+                        <div class="bg-primary-100 dark:bg-primary-900/20 rounded-full w-12 h-12 flex items-center justify-center mb-5">
+                            <i class="fas fa-heart text-primary-600 dark:text-primary-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Free Service</h3>
+                        <p class="text-slate-600 dark:text-slate-400">Access valuable medical insights at no cost to you</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="py-16 sm:py-24 bg-white dark:bg-slate-800">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
+                    <span class="text-sm font-semibold text-primary-600 dark:text-primary-400 uppercase tracking-wide">Process</span>
+                    <h2 class="mt-2 text-3xl font-display font-bold text-slate-900 dark:text-white sm:text-4xl">How It Works</h2>
+                    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">Getting started with our AI medical assistant is simple</p>
+                </div>
+                
+                <div class="relative">
+                    <!-- Connector Line (desktop) -->
+                    <div class="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-slate-200 dark:bg-slate-700 z-0"></div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+                        <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-soft-lg transition-soft text-center animate-slide-up" style="animation-delay: 0.1s">
+                            <div class="bg-primary-600 dark:bg-primary-500 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-5 text-xl font-bold">1</div>
+                            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Describe Symptoms</h3>
+                            <p class="text-slate-600 dark:text-slate-400">Enter your symptoms in natural language, just as you would tell your doctor</p>
+                        </div>
+                        
+                        <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-soft-lg transition-soft text-center animate-slide-up" style="animation-delay: 0.2s">
+                            <div class="bg-primary-600 dark:bg-primary-500 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-5 text-xl font-bold">2</div>
+                            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">AI Analysis</h3>
+                            <p class="text-slate-600 dark:text-slate-400">Our advanced AI processes your description and compares it with medical knowledge</p>
+                        </div>
+                        
+                        <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-soft-lg transition-soft text-center animate-slide-up" style="animation-delay: 0.3s">
+                            <div class="bg-primary-600 dark:bg-primary-500 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-5 text-xl font-bold">3</div>
+                            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Get Results</h3>
+                            <p class="text-slate-600 dark:text-slate-400">Receive detailed analysis and recommendations based on your symptoms</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonials Section -->
+        <section class="py-16 sm:py-24 bg-slate-50 dark:bg-slate-900">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
+                    <span class="text-sm font-semibold text-primary-600 dark:text-primary-400 uppercase tracking-wide">Testimonials</span>
+                    <h2 class="mt-2 text-3xl font-display font-bold text-slate-900 dark:text-white sm:text-4xl">What Our Users Say</h2>
+                    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">Hear from people who've experienced our AI Medical Assistant</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-soft hover:shadow-soft-lg transition-soft animate-slide-up" style="animation-delay: 0.1s">
+                        <div class="flex text-yellow-400 mb-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-slate-700 dark:text-slate-300 mb-6">
+                            "The AI Medical Assistant helped me identify my symptoms quickly. The recommendations were spot-on and saved me an unnecessary trip to the doctor."
+                        </p>
+                        <div class="flex items-center">
+                            <div class="bg-primary-100 dark:bg-primary-900/20 rounded-full h-12 w-12 flex items-center justify-center text-primary-600 dark:text-primary-400 font-semibold">JS</div>
+                            <div class="ml-3">
+                                <h4 class="text-sm font-semibold text-slate-900 dark:text-white">Jane Smith</h4>
+                                <p class="text-sm text-slate-500 dark:text-slate-400">Patient</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-soft hover:shadow-soft-lg transition-soft animate-slide-up" style="animation-delay: 0.2s">
+                        <div class="flex text-yellow-400 mb-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-slate-700 dark:text-slate-300 mb-6">
+                            "As a healthcare provider, I'm impressed with the accuracy of this system. It helps my patients get preliminary insights before their appointments."
+                        </p>
+                        <div class="flex items-center">
+                            <div class="bg-primary-100 dark:bg-primary-900/20 rounded-full h-12 w-12 flex items-center justify-center text-primary-600 dark:text-primary-400 font-semibold">RC</div>
+                            <div class="ml-3">
+                                <h4 class="text-sm font-semibold text-slate-900 dark:text-white">Dr. Robert Chen</h4>
+                                <p class="text-sm text-slate-500 dark:text-slate-400">Family Physician</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-soft hover:shadow-soft-lg transition-soft animate-slide-up" style="animation-delay: 0.3s">
+                        <div class="flex text-yellow-400 mb-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="text-slate-700 dark:text-slate-300 mb-6">
+                            "The interface is so intuitive. I appreciate how it explained possible causes of my symptoms in easy-to-understand language."
+                        </p>
+                        <div class="flex items-center">
+                            <div class="bg-primary-100 dark:bg-primary-900/20 rounded-full h-12 w-12 flex items-center justify-center text-primary-600 dark:text-primary-400 font-semibold">AJ</div>
+                            <div class="ml-3">
+                                <h4 class="text-sm font-semibold text-slate-900 dark:text-white">Alex Johnson</h4>
+                                <p class="text-sm text-slate-500 dark:text-slate-400">User</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="py-16 sm:py-20 gradient-primary text-white relative overflow-hidden">
+            <div class="absolute inset-0">
+                <div class="absolute inset-0 bg-[url('background.jpg')] bg-cover bg-center opacity-10"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-600/90 to-primary-800/90"></div>
+            </div>
+            
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center animate-fade-in">
+                <h2 class="text-3xl font-display font-bold mb-6">Ready to try our AI Medical Assistant?</h2>
+                <p class="text-lg text-white/90 mb-10 max-w-2xl mx-auto">Get started with your first diagnosis - it's free and takes less than 5 minutes</p>
+                <a href="diagnosis.html" class="inline-flex items-center bg-white text-primary-600 hover:bg-slate-100 dark:hover:bg-slate-200 font-medium rounded-full shadow-soft px-8 py-4 transition-soft focus-ring">
+                    Start Your Diagnosis
+                    <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 bg-slate-50 dark:bg-slate-800/50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl sm:text-4xl font-display font-bold text-slate-900 dark:text-white mb-4">تواصل معنا</h2>
+                        <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">نحن هنا لمساعدتك في جميع احتياجاتك الطبية. تواصل معنا للحصول على الدعم أو لحجز موعد مع أحد أطبائنا المتخصصين.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Contact Form -->
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-soft p-6 sm:p-8 animate-fade-in">
+                            <h3 class="text-2xl font-display font-bold text-slate-900 dark:text-white mb-6">أرسل لنا رسالة</h3>
+                            <form class="space-y-6">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="name" class="block text-sm font-medium text-slate-700 dark:text-slate-300">الاسم الكامل</label>
+                                        <input type="text" id="name" class="mt-1 block w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-200 dark:focus:ring-primary-800 focus:ring-opacity-50 transition-soft" required>
+                                    </div>
+                                    <div>
+                                        <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-300">البريد الإلكتروني</label>
+                                        <input type="email" id="email" class="mt-1 block w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-200 dark:focus:ring-primary-800 focus:ring-opacity-50 transition-soft" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="subject" class="block text-sm font-medium text-slate-700 dark:text-slate-300">الموضوع</label>
+                                    <input type="text" id="subject" class="mt-1 block w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-200 dark:focus:ring-primary-800 focus:ring-opacity-50 transition-soft" required>
+                                </div>
+                                <div>
+                                    <label for="message" class="block text-sm font-medium text-slate-700 dark:text-slate-300">الرسالة</label>
+                                    <textarea id="message" rows="4" class="mt-1 block w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-200 dark:focus:ring-primary-800 focus:ring-opacity-50 transition-soft" required></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white rounded-lg py-3 px-4 font-medium shadow-soft transition-soft focus-ring">
+                                    إرسال الرسالة
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div class="space-y-8">
+                            <!-- Contact Cards -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div class="bg-white dark:bg-slate-800 rounded-xl shadow-soft p-6 transition-soft hover:shadow-soft-lg">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-phone text-primary-600 dark:text-primary-400 text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-slate-900 dark:text-white">الهاتف</h3>
+                                            <p class="text-slate-600 dark:text-slate-400">+1 (555) 123-4567</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white dark:bg-slate-800 rounded-xl shadow-soft p-6 transition-soft hover:shadow-soft-lg">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-envelope text-primary-600 dark:text-primary-400 text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-slate-900 dark:text-white">البريد الإلكتروني</h3>
+                                            <p class="text-slate-600 dark:text-slate-400">support@aimedical.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Location Card -->
+                            <div class="bg-white dark:bg-slate-800 rounded-xl shadow-soft p-6 transition-soft hover:shadow-soft-lg">
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-map-marker-alt text-primary-600 dark:text-primary-400 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">العنوان</h3>
+                                        <p class="text-slate-600 dark:text-slate-400">123 شارع الصحة<br>المدينة الطبية، م.م 12345<br>الولايات المتحدة</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Business Hours -->
+                            <div class="bg-white dark:bg-slate-800 rounded-xl shadow-soft p-6 transition-soft hover:shadow-soft-lg">
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-clock text-primary-600 dark:text-primary-400 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">ساعات العمل</h3>
+                                        <div class="space-y-1 text-slate-600 dark:text-slate-400">
+                                            <p>السبت - الخميس: 8:00 صباحاً - 8:00 مساءً</p>
+                                            <p>الجمعة: 9:00 صباحاً - 5:00 مساءً</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Social Media Links -->
+                            <div class="bg-white dark:bg-slate-800 rounded-xl shadow-soft p-6 transition-soft hover:shadow-soft-lg">
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-share-alt text-primary-600 dark:text-primary-400 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">تابعنا على وسائل التواصل الاجتماعي</h3>
+                                        <div class="flex space-x-4 rtl:space-x-reverse">
+                                            <a href="#" class="w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center text-primary-600 dark:text-primary-400 hover:bg-primary-200 dark:hover:bg-primary-800/50 transition-soft focus-ring">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                            <a href="#" class="w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center text-primary-600 dark:text-primary-400 hover:bg-primary-200 dark:hover:bg-primary-800/50 transition-soft focus-ring">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                            <a href="#" class="w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center text-primary-600 dark:text-primary-400 hover:bg-primary-200 dark:hover:bg-primary-800/50 transition-soft focus-ring">
+                                                <i class="fab fa-instagram"></i>
+                                            </a>
+                                            <a href="#" class="w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center text-primary-600 dark:text-primary-400 hover:bg-primary-200 dark:hover:bg-primary-800/50 transition-soft focus-ring">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="About.Html" class="hover:text-white transition-soft">About Us</a></li>
+                        <li><a href="diagnosis.html" class="hover:text-white transition-soft">Get Diagnosis</a></li>
+                        <li><a href="privacy.html" class="hover:text-white transition-soft">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-white transition-soft">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-slate-300 hover:text-white transition-soft focus-ring rounded-full p-2" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-slate-300 hover:text-white transition-soft focus-ring rounded-full p-2" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-slate-300 hover:text-white transition-soft focus-ring rounded-full p-2" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-slate-300 hover:text-white transition-soft focus-ring rounded-full p-2" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-primary-400"></i>
+                            <a href="mailto:support@aimedical.com" class="hover:text-white transition-soft">support@aimedical.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-2 text-primary-400"></i>
+                            <a href="tel:+15551234567" class="hover:text-white transition-soft">+1 (555) 123-4567</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-primary-400"></i>
+                            <span>123 Health Street, Medical City</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Newsletter</h3>
+                    <p class="mb-4 text-slate-400">Stay updated with our latest features and health tips</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg w-full focus:outline-none focus:ring-2 focus:ring-primary-500 bg-slate-800 text-white border border-slate-700" />
+                        <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-r-lg transition-soft focus-ring">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-400">&copy; 2024 AI Medical Assistant. All rights reserved.</p>
+                <p class="mt-4 md:mt-0 text-slate-400">Made with <i class="fas fa-heart text-red-500"></i> for better healthcare</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeToggleMobile = document.getElementById('themeToggleMobile');
+        
+        function setTheme(darkMode) {
+            if (darkMode) {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+        
+        // Check for saved theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            setTheme(true);
+        } else {
+            setTheme(false);
+        }
+        
+        // Toggle theme
+        [themeToggle, themeToggleMobile].forEach(button => {
+            if (button) {
+                button.addEventListener('click', () => {
+                    const isDark = document.documentElement.classList.contains('dark');
+                    setTheme(!isDark);
+                });
+            }
+        });
+        
+        // Counter animation
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+        
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            let count = 0;
+            
+            const updateCount = () => {
+                const increment = target / speed;
+                
+                if (count < target) {
+                    count += increment;
+                    counter.innerText = Math.ceil(count);
+                    setTimeout(updateCount, 1);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            
+            updateCount();
+        });
+    </script>
+</body>
+</html>

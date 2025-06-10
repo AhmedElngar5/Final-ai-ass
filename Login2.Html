@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prescripto - Login</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .navbar {
+        background: var(--white);
+        box-shadow: var(--shadow);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+  
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        justify-content: center;
+        padding: 1rem;
+      }
+  
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 500;
+        transition: all 0.3s ease;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+      }
+  
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--primary-color);
+        background: var(--light-gray);
+      }
+  
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #0a0a5f;
+    }
+
+    .logo-icon {
+      width: 30px;
+      height: 30px;
+      background-color: #6366f1;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #000;
+      font-weight: 600;
+    }
+
+    .admin-panel {
+      padding: 8px 15px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      background-color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .container {
+      margin-top: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-card {
+      width: 350-px;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+      background-color: white;
+    }
+    .container {
+        margin-top: 120px; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+
+    .login-card h2 {
+      margin-bottom: 10px;
+      font-size: 26px;
+      color: #333;
+    }
+
+    .login-card p {
+      font-size: 14px;
+      margin-bottom: 20px;
+      color: #666;
+    }
+
+    .login-card input[type="email"],
+    .login-card input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .login-card button {
+      width: 100%;
+      padding: 12px;
+      background-color: #6366f1;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .login-card .signup {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .login-card .signup a {
+      color: #6366f1;
+      text-decoration: none;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #fff8dc;
+      color: #444;
+      padding: 16px 20px;
+      border-left: 6px solid #facc15;
+      border-radius: 8px;
+      box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 250px;
+      max-width: 320px;
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .toast .icon {
+      color: #facc15;
+      font-size: 20px;
+    }
+
+    .toast .message {
+      flex-grow: 1;
+      font-weight: 500;
+    }
+
+    .toast .close {
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      color: #888;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index face.html"> Contact</a></li>
+          <li><a href="diagnosis.html">Diagnosis</a></li>
+          <li><a href="About.Html">About</a></li>
+          <li><a href="#" class="login-btn">Login</a></li>
+        </ul>
+      </header>
+  <div class="container">
+    <div class="login-card">
+      <h2>Login</h2>
+      <p>Please log in to book appointment</p>
+      <form id="loginForm">
+        <input type="email" placeholder="Email" id="email" required />
+        <input type="password" placeholder="Password" id="password" required />
+        <button type="submit">Login</button>
+      </form>
+      <div class="signup">
+        Create an new account? <a href="Loge.Html">Click here</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast container -->
+  <div class="toast" id="toast" style="display: none;">
+    <span class="icon">⚠️</span>
+    <span class="message">Login to book appointment</span>
+    <button class="close" onclick="hideToast()">✕</button>
+  </div>
+
+  <script>
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.querySelector('.message').innerText = message;
+      toast.style.display = 'flex';
+
+      // Auto hide after 5 seconds
+      setTimeout(() => {
+        hideToast();
+      }, 5000);
+    }
+
+    function hideToast() {
+      const toast = document.getElementById('toast');
+      toast.style.display = 'none';
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      if (!email || !password) {
+        showToast("Please enter both email and password");
+      } else {
+        showToast("Login to book appointment");
+      }
+    });
+  </script>
+</body>
+</html>
+

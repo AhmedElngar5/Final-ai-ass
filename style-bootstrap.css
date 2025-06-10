@@ -1,0 +1,294 @@
+/* 
+ * AI Medical Assistant - Custom Bootstrap Theme
+ * This file contains custom styling on top of Bootstrap 5
+ */
+
+:root {
+  /* Custom color scheme */
+  --bs-primary: #2563eb;
+  --bs-primary-rgb: 37, 99, 235;
+  --bs-secondary: #f97316;
+  --bs-secondary-rgb: 249, 115, 22;
+  --bs-success: #10b981;
+  --bs-success-rgb: 16, 185, 129;
+  --bs-info: #0ea5e9;
+  --bs-info-rgb: 14, 165, 233;
+  --bs-warning: #f59e0b;
+  --bs-warning-rgb: 245, 158, 11;
+  --bs-danger: #ef4444;
+  --bs-danger-rgb: 239, 68, 68;
+  --bs-light: #f8fafc;
+  --bs-light-rgb: 248, 250, 252;
+  --bs-dark: #1e293b;
+  --bs-dark-rgb: 30, 41, 59;
+
+  /* Custom font */
+  --bs-body-font-family: 'Plus Jakarta Sans', sans-serif;
+  --bs-body-font-size: 1rem;
+  --bs-body-line-height: 1.6;
+  --bs-body-color: #1e293b;
+  --bs-body-bg: #f8fafc;
+  
+  /* Custom shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Global styles */
+body {
+  padding-top: 4rem;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+.btn {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: rgba(255, 255, 255, 0.98);
+  padding: 1rem 0;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand {
+  font-size: 1.25rem;
+}
+
+.nav-link {
+  font-weight: 500;
+  padding: 0.5rem 1rem !important;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: var(--bs-primary);
+  transition: width 0.3s ease;
+}
+
+.nav-link.active:after,
+.nav-link:hover:after {
+  width: 80%;
+}
+
+/* Hero Section */
+.hero {
+  background-image: linear-gradient(rgba(30, 41, 59, 0.85), rgba(30, 41, 59, 0.9)), url('background.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 650px;
+  padding: 6rem 0;
+}
+
+.hero-image-container {
+  transform: translateY(-20px);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(-20px); }
+  50% { transform: translateY(0); }
+  100% { transform: translateY(-20px); }
+}
+
+/* Feature Icons */
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
+}
+
+/* Step Numbers */
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+/* Card hover effect */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Testimonial styling */
+.testimonial-avatar {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+/* Forms */
+.form-control:focus {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+/* Footer styles */
+.footer {
+  background-color: #0f172a;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .hero {
+    min-height: 500px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 3.5rem;
+  }
+  
+  .navbar {
+    padding: 0.5rem 0;
+  }
+  
+  .hero {
+    padding: 4rem 0;
+  }
+  
+  .hero h1 {
+    font-size: 2.25rem;
+  }
+}
+
+/* Custom animations */
+.fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading animation */
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid rgba(var(--bs-primary-rgb), 0.2);
+  border-top: 5px solid var(--bs-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Custom utilities */
+.rounded-4 {
+  border-radius: 0.75rem !important;
+}
+
+.rounded-5 {
+  border-radius: 1rem !important;
+}
+
+.py-md-6 {
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
+}
+
+.h-400 {
+  height: 400px;
+}
+
+/* Diagnosis form styles */
+.diagnosis-form-container {
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.tips-card {
+  border-left: 4px solid var(--bs-info);
+  background-color: rgba(var(--bs-info-rgb), 0.1);
+}
+
+/* Results page styles */
+.condition-card {
+  border-left: 4px solid var(--bs-primary);
+  transition: transform 0.3s ease;
+}
+
+.condition-card:hover {
+  transform: translateX(5px);
+}
+
+.probability-badge {
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  border-radius: 1rem;
+}
+
+.probability-high {
+  background-color: var(--bs-danger);
+  color: white;
+}
+
+.probability-medium {
+  background-color: var(--bs-warning);
+  color: white;
+}
+
+.probability-low {
+  background-color: var(--bs-info);
+  color: white;
+}
+
+/* Medical disclaimer styling */
+.medical-disclaimer {
+  background-color: rgba(var(--bs-danger-rgb), 0.1);
+  border-left: 4px solid var(--bs-danger);
+} 

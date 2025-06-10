@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doctor Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 20px;
+    }
+    .profile-container {
+      display: flex;
+      gap: 30px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 30px;
+      align-items: center;
+    }
+    .profile-image img {
+      width: 350px;
+      height: auto;
+      border-radius: 10px;
+    }
+    .profile-details {
+      flex: 1;
+    }
+    .profile-details h2 {
+      margin: 0;
+      font-size: 28px;
+    }
+    .profile-details h2 .verified {
+      color: #4c6ef5;
+    }
+    .profile-details p {
+      color: #555;
+      line-height: 1.6;
+    }
+    .profile-details .fee {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    .booking-section {
+      margin-top: 40px;
+    }
+    .days {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .day {
+      border: 1px solid #ddd;
+      border-radius: 50px;
+      padding: 15px 20px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .day.active {
+      background-color: #4c6ef5;
+      color: #fff;
+      border-color: #4c6ef5;
+    }
+    .slots {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    .slot {
+      border: 1px solid #ddd;
+      border-radius: 50px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    .book-button {
+      background-color: #4c6ef5;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile-image">
+      <img src="AdobeStock_172186647_Preview.jpeg" alt="Doctor Image" />
+    </div>
+    <div class="profile-details">
+      <h2>Dr. Amelia Hill <span class="verified"></span></h2>
+      <p>MBBS - Dermatologist <span style="background: #eee; padding: 3px 8px; border-radius: 10px; font-size: 12px;">5 Years</span></p>
+      <p><strong>About</strong> <span title="About">ⓘ</span><br />
+        Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.</p>
+      <p class="fee">Appointment fee: <strong>$100</strong></p>
+    </div>
+  </div>
+
+  <div class="booking-section">
+    <h3>Booking slots</h3>
+  
+    <div class="days">
+      <button class="day active" data-day="8">TUE<br />8</button>
+      <button class="day" data-day="9">WED<br />9</button>
+      <button class="day" data-day="10">THU<br />10</button>
+      <button class="day" data-day="11">FRI<br />11</button>
+      <button class="day" data-day="12">SAT<br />12</button>
+      <button class="day" data-day="13">SUN<br />13</button>
+      <button class="day" data-day="14">MON<br />14</button>
+    </div>
+  
+    <div class="slots" id="slots">
+      <!-- Slots will be injected here -->
+    </div>
+  
+    <a href="Loge.Html" class="book-button">Book an appointment</a>
+    
+  </div>
+  
+  <style>
+    .day, .slot {
+      margin: 4px;
+      padding: 10px 14px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      background: white;
+      cursor: pointer;
+    }
+  
+    .day.active, .slot.active {
+      background-color: #5c6eff;
+      color: white;
+      border-color: #5c6eff;
+    }
+  
+    .book-button {
+      margin-top: 20px;
+      padding: 10px 30px;
+      border: none;
+      background-color: #5c6eff;
+      color: white;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+  </style>
+  
+  <script>
+    const timeSlots = {
+      8: ["08:00 pm", "08:30 pm"],
+      9: ["10:30 am", "11:00 am", "11:30 am", "12:00 pm", "12:30 pm", "01:00 pm", "01:30 pm", "02:00 pm", "02:30 pm"],
+      10: ["10:30 am", "11:00 am", "11:30 am", "12:00 pm", "12:30 pm", "01:00 pm", "01:30 pm", "02:00 pm", "02:30 pm"],
+      11: ["10:30 am", "11:00 am", "11:30 am", "12:00 pm", "12:30 pm", "01:00 pm", "01:30 pm", "02:00 pm", "02:30 pm"],
+      12: ["10:30 am", "11:00 am", "11:30 am", "12:00 pm", "12:30 pm", "01:00 pm", "01:30 pm", "02:00 pm", "02:30 pm"],
+      13: ["10:30 am", "11:00 am", "11:30 am", "12:00 pm", "12:30 pm", "01:00 pm", "01:30 pm", "02:00 pm", "02:30 pm"],
+      14: ["10:30 am", "11:00 am", "11:30 am", "12:00 pm", "12:30 pm", "01:00 pm", "01:30 pm", "02:00 pm", "02:30 pm"]
+    };
+  
+    const dayButtons = document.querySelectorAll('.day');
+    const slotsContainer = document.getElementById('slots');
+  
+    let selectedDay = 8;
+    let selectedTime = null;
+  
+    function renderSlots(day) {
+      const slots = timeSlots[day] || [];
+      slotsContainer.innerHTML = slots.map(time => `
+        <button class="slot">${time}</button>
+      `).join("");
+  
+      const slotButtons = document.querySelectorAll('.slot');
+      slotButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          slotButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          selectedTime = button.textContent;
+        });
+      });
+    }
+  
+    dayButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        dayButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        selectedDay = button.dataset.day;
+        selectedTime = null;
+        renderSlots(selectedDay);
+        
+        
+      });
+    });
+  
+    // Initial render
+    renderSlots(selectedDay);
+  </script>
+  
